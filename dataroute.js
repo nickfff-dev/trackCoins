@@ -14,11 +14,11 @@ var { getThorChain } = require('./index')
 
 
 datarouter.get('/api/senddata', (req, res) => {
-  var thorChain = getThorChain();
-  var debank = getDebank();
-  var mintScan = getMintScan();
+  const debank = getDebank();
+  const mintScan = getMintScan();
+  const thorChain = getThorChain();
  
-  Promise.all([thorChain, debank, mintScan, ]).then((values) => {
+  Promise.all([thorChain, debank, mintScan ]).then((values) => {
     console.log(values);
 
     res.send({ data: values });
