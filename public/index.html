@@ -5,43 +5,43 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  <link rel="icon" href="/favicon.ico"/>
- <script>
-  function getData(){
-    fetch('/api/senddata',{
-      method: "GET",
-      headers:{
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin" : "*"
-      }
-    }
-  ).then((res)=>{
-  
-    res.json().then((data)=>{
-     
-     Object.values(data).map((item)=>{
-      
-       item.map((kaitem)=>{
-      Object.keys(kaitem).map((dataz)=>{
-        document.getElementById(dataz).innerHTML = kaitem[dataz]
-      }) 
-       })
-      })
-    
-    })
- 
-    
-    })
-   }
 
-
-
-getData()
-
-
-  </script>
  </head>
 <body style="background-color:#111827; color:white; margin:0,100px">
-
+  <script>
+    
+      fetch('/api/senddata',{
+        method: "GET",
+        headers:{
+          "content-type": "application/json",
+          "Access-Control-Allow-Origin" : "*"
+        }
+      }
+    ).then((res)=>{
+    
+      res.json().then((data)=>{
+       
+       Object.values(data).map((item)=>{
+        
+         item.map((kaitem)=>{
+        Object.keys(kaitem).map((dataz)=>{
+          document.getElementById(dataz).innerHTML = kaitem[dataz]
+        }) 
+         })
+        })
+      
+      })
+   
+      
+      })
+     
+  
+  
+  
+  getData()
+  
+  
+    </script>
   
 <h1>Coin Tracker </h1>
 
