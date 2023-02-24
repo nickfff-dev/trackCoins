@@ -1,4 +1,4 @@
-
+const cors = require("cors")
 var fs = require('fs');
 const express = require("express");
 const app = express();
