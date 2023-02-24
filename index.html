@@ -11,13 +11,9 @@
   
 
 
- 
-var cliskus = button.getElementById("cliskus");
-if(cliskus){
-  cliskus.addEventListener("click", (e)=>{
-    e.preventDefault();
+
+
     fetch('/api/senddata',{
-      method:'GET',
       headers:{
         "content-type": "application/json",
         "Access-Control-Allow-Origin" : "*"
@@ -42,14 +38,14 @@ if(cliskus){
     })
 
 
-  })
-}
+
+
 
 
   </script>
   
 <h1>Coin Tracker </h1>
-<button id="cliskus" style="padding:10px">load data</button>
+
 <div id="resultsContainer" style="display:flex; height: 70%; flex-direction:column; justify-items:space-between; margin:50px,auto;">
       <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between; margin-bottom:50px">
      <h1>debank</h1>
