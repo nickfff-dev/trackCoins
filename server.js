@@ -34,7 +34,6 @@ app.use('/api/senddata', (req, res) => {
     console.log(values);
 
     res.send({ data: values });
-    res.end();
 
    
    
