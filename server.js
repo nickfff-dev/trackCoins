@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/public'))
 
 
 
-app.use('/', datarouter)
+app.use('/api/senddata', datarouter)
 
 server.listen(process.env.PORT || 3000)
 
