@@ -14,7 +14,7 @@ exports.getDebank = async () => {
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox'],
+    args: ['--no-sandbox','--start-maximized'],
     defaultViewport:false
   });
 
@@ -47,7 +47,7 @@ exports.getThorChain = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: [ '--no-sandbox'],
+    args: [ '--no-sandbox','--start-maximized'],
     defaultViewport: false
   });
 
@@ -76,7 +76,7 @@ exports.getMintScan = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox'],
+    args: ['--no-sandbox','--start-maximized'],
     defaultViewport: false
   });
 
