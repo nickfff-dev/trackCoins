@@ -8,7 +8,7 @@ const { getThorChain } = require('./index')
 
 
 
-
+app.use(express.static(__dirname + '/public'))
 
 
 
@@ -17,22 +17,22 @@ const server = require("http").Server(app);
 app.get('/', (req, res) => {
   
   res.writeHead(200, { 'content-type': 'text/html'});
-  fs.readFile('./index.html', function (error, html) {
+  fs.readFile(__dirname + '/public/index.html', function (error, html) {
       res.end(html)
     })
 
  
 })
 
-const debank = getDebank();
-  
-const thorChain = getThorChain();
-const mintScan = getMintScan();
+
 
 
 app.use('/api/senddata', (req, res) => {
 
-
+  let debank = getDebank();
+  
+  let thorChain = getThorChain();
+  let mintScan = getMintScan()
   Promise.all([mintScan,thorChain, debank]).then((values) => {
     console.log(values);
 
