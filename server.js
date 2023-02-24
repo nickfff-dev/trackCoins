@@ -15,12 +15,20 @@ const { getThorChain } = require('./index')
 
 const server = require("http").Server(app);
 
-
-const debank = getDebank();
-  const mintScan = getMintScan();
-  const thorChain = getThorChain();
-app.get('/api/senddata', (req, res) => {
+app.get('/', (req, res) => {
   
+  res.writeHead(200, { 'content-type': 'text/html'});
+  fs.readFile('./index.html', function (error, html) {
+      res.end(html)
+    })
+
+ 
+})
+const debank = getDebank();
+const mintScan = getMintScan();
+const thorChain = getThorChain();
+app.use('/api/senddata', (req, res) => {
+
 
   Promise.all([thorChain, mintScan, debank]).then((values) => {
     console.log(values);
@@ -48,8 +56,6 @@ app.get('/api/senddata', (req, res) => {
   })
  
 })
-
-
 
 server.listen(process.env.PORT || 3000)
 
