@@ -5,11 +5,11 @@ const { getDebank } = require("./index")
 const { getMintScan } = require('./index')
 const { getThorChain } = require('./index')
 
-var debank = getDebank() 
-var mintscan = getMintScan()
-var thorscan =getThorChain()
-datarouter.get('/api/senddata', (req, res) => {
 
+datarouter.get('/api/senddata', (req, res) => {
+  var debank = getDebank() 
+  var mintscan = getMintScan()
+  var thorscan =getThorChain()
   
   Promise.all([mintscan,debank,thorscan ]).then((values) => {
     console.log(values);
