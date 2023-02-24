@@ -6,8 +6,8 @@
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  <link rel="icon" href="/favicon.ico"/>
  <script>
-  function getData(){
-    fetch('/api/senddata',{
+  function getMint(){
+    fetch('/api/getmintscan',{
       method: "GET",
       headers:{
         "content-type": "application/json",
@@ -31,14 +31,78 @@
  
     
     })
-   }
+   };
 
 
 
-getData()
+
+
+
+getMint();
 
 
   </script>
+
+
+  <script>
+       function getThor(){
+    fetch('/api/getthorchain',{
+      method: "GET",
+      headers:{
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin" : "*"
+      }
+    }
+  ).then((res)=>{
+  
+    res.json().then((data)=>{
+     
+     Object.values(data).map((item)=>{
+      
+       item.map((kaitem)=>{
+      Object.keys(kaitem).map((dataz)=>{
+        document.getElementById(dataz).innerHTML = kaitem[dataz]
+      }) 
+       })
+      })
+    
+    })
+ 
+    
+    })
+   };
+   getThor();
+  </script>
+
+    <script>
+      function getDeBank(){
+   fetch('/api/getdebank',{
+     method: "GET",
+     headers:{
+       "content-type": "application/json",
+       "Access-Control-Allow-Origin" : "*"
+     }
+   }
+ ).then((res)=>{
+ 
+   res.json().then((data)=>{
+    
+    Object.values(data).map((item)=>{
+     
+      item.map((kaitem)=>{
+     Object.keys(kaitem).map((dataz)=>{
+       document.getElementById(dataz).innerHTML = kaitem[dataz]
+     }) 
+      })
+     })
+   
+   })
+
+   
+   })
+  };
+  getDeBank();
+ </script>
  </head>
 <body style="background-color:#111827; color:white; margin:0,100px">
 

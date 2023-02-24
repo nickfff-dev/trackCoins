@@ -14,7 +14,7 @@ exports.getDebank = async () => {
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox','--start-maximized'],
+    args: ['--no-sandbox'],
     defaultViewport:false
   });
 
@@ -35,7 +35,7 @@ exports.getDebank = async () => {
 
 
   
-
+  browser.close()
   return {debankaddress,debankwallet,phuture,gmX,camelot}
 
 }
@@ -47,7 +47,7 @@ exports.getThorChain = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: [ '--no-sandbox','--start-maximized'],
+    args: [ '--no-sandbox'],
     defaultViewport: false
   });
 
@@ -65,6 +65,7 @@ exports.getThorChain = async () => {
   const tokenThor = weza?.split("(")[0]
 
   console.log(weza);
+  browser.close()
   return {addressThor,balanceThor,tokenThor}
 
 };
@@ -76,20 +77,23 @@ exports.getMintScan = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox','--start-maximized'],
+    args: ['--no-sandbox'],
     defaultViewport: false
   });
 
   // Create a page
   const page = await browser.newPage();
-  const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
+
   // Go to your site
 
   await page.goto('https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae', { waitUntil: "networkidle0", timeout: 0 });
+  
+  Promise.all([await delay(20000)]).then(() => {
+   console.log("waited")
+  })
   const addressMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_address__2WY10.AccountInfo_cursor__1Nv86", el => el.innerText);
-  await delay(10000);
   const tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", el => el.innerText);
-
+  browser.close()
   console.log(tokenMint);
   return {addressMint,tokenMint}
 };
