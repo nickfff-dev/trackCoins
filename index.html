@@ -10,10 +10,11 @@
   <script type="text/javascript">
 
  
-  fetch('/api/senddata',{
+  fetch('https://track-coins-git-main-nickfff-dev.vercel.app/api/senddata',{
       method:'GET',
       headers:{
-        "content-type": "application/json"
+        "content-type": "application/json",
+      
       }
     }
   ).then((res)=>{
