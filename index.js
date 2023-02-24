@@ -23,7 +23,7 @@ exports.getDebank = async () => {
 
 
   await page.goto("https://debank.com/profile/0xf99d8717c3c2bb5a4959fab7f152eddee56580e2", 
-    { waitUntil: "networkidle2",timeout:0}
+    { waitUntil: "networkidle0",timeout:0}
   );
 
 
