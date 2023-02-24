@@ -1,5 +1,4 @@
-const cors = require("cors")
-var fs = require('fs');
+const fs = require('fs');
 const express = require("express");
 const app = express();
 const { getDebank } = require("./index")
@@ -27,9 +26,7 @@ app.get('/', (req, res) => {
 const debank = getDebank();
 const mintScan = getMintScan();
 const thorChain = getThorChain();
-app.use(cors(
-  {origin: 'https://track-coins-git-main-nickfff-dev.vercel.app'}
-))
+
 app.use('/api/senddata', (req, res) => {
 
 

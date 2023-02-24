@@ -11,11 +11,11 @@
 
  
 
-  fetch('https://track-coins-git-main-nickfff-dev.vercel.app/api/senddata',{
-    method: "GET",
+  fetch('/api/senddata',{
+      method:'GET',
       headers:{
         "content-type": "application/json",
-        "Access-Control-Allow-Origin" : "https://track-coins-git-main-nickfff-dev.vercel.app"
+        "Access-Control-Allow-Origin" : "*"
       }
     }
   ).then((res)=>{
