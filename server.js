@@ -27,7 +27,9 @@ app.get('/', (req, res) => {
 const debank = getDebank();
 const mintScan = getMintScan();
 const thorChain = getThorChain();
-app.use(cors())
+app.use(cors(
+  {origin: 'https://track-coins-git-main-nickfff-dev.vercel.app'}
+))
 app.use('/api/senddata', (req, res) => {
 
 
