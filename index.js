@@ -7,7 +7,7 @@ exports.getDebank = async () => {
   // - a visible browser (`headless: false` - easier to debug because you'll see the browser in action)
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: ['--start-maximized'],
     defaultViewport:false
   });
