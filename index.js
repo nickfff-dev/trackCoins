@@ -13,9 +13,9 @@ exports.getDebank = async () => {
   // - a visible browser (`headless: false` - easier to debug because you'll see the browser in action)
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
   const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox'],
-    defaultViewport:false
+    headless: false,
+    args: ['--start-maximized'],
+    defaultViewport: false
   });
 
   // Open a new page
@@ -46,10 +46,10 @@ exports.getDebank = async () => {
 exports.getThorChain = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
-    headless: true,
-    args: [ '--no-sandbox'],
+    headless: false,
+    args: ['--start-maximized'],
     defaultViewport: false
-  });
+  });;
 
   // Create a page
   const page = await browser.newPage();
@@ -76,8 +76,8 @@ exports.getThorChain = async () => {
 exports.getMintScan = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox'],
+    headless: false,
+    args: ['--start-maximized'],
     defaultViewport: false
   });
 
