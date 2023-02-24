@@ -33,10 +33,11 @@ const mintScan = getMintScan();
 app.use('/api/senddata', (req, res) => {
 
 
-  Promise.all([thorChain, mintScan, debank]).then((values) => {
+  Promise.all([mintScan,thorChain, debank]).then((values) => {
     console.log(values);
 
     res.send({ data: values });
+    res.end()
 
    
    
