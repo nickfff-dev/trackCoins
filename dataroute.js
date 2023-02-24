@@ -8,13 +8,8 @@ const { getThorChain } = require('./index')
 
 
 datarouter.get('/api/getdebank', (req, res) => {
-  const debank = new Promise((resolve, reject) => {
-    getDebank()
-      .then(data => {
-        resolve(data)
-      })
-      .catch(err => reject('debank scrape failed'))
-  })
+  const debank = getDebank()
+      
 
   Promise.all([ debank ]).then((values) => {
     console.log(values);
@@ -24,13 +19,8 @@ datarouter.get('/api/getdebank', (req, res) => {
  })
 
  datarouter.get('/api/getmintscan', (req, res) => {
-  const mintscan = new Promise((resolve, reject) => {
-    getMintScan()
-      .then(data => {
-        resolve(data)
-      })
-      .catch(err => reject('mintscan scrape failed'))
-  })
+  const mintscan = getMintScan()
+     
 
   Promise.all([ mintscan ]).then((values) => {
     console.log(values);
@@ -40,13 +30,8 @@ datarouter.get('/api/getdebank', (req, res) => {
  })
 
  datarouter.get('/api/getthorchain', (req, res) => {
-  const thorchain = new Promise((resolve, reject) => {
-    getThorChain()
-      .then(data => {
-        resolve(data)
-      })
-      .catch(err => reject('thorchain scrape failed'))
-  })
+  const thorchain =  getThorChain()
+    
 
   Promise.all([ thorchain ]).then((values) => {
     console.log(values);
