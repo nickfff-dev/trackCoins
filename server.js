@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 
 
-app.use('/api/senddata', (req, res) => {
+app.get('/api/senddata', (req, res) => {
 
   let debank = getDebank();
   
