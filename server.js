@@ -5,7 +5,7 @@ const { getDebank } = require("./index")
 const { getMintScan } = require('./index')
 const { getThorChain } = require('./index')
 
-
+const datarouter = require('./dataroute')
 
 
 app.use(express.static(__dirname + '/public'))
@@ -25,25 +25,7 @@ app.get('/', (req, res) => {
 })
 
 
-
-
-app.get('/api/senddata', (req, res) => {
-
-  let debank = getDebank();
-  
-  let thorChain = getThorChain();
-  let mintScan = getMintScan()
-  Promise.all([mintScan,thorChain, debank]).then((values) => {
-    console.log(values);
-
-    res.send({ data: values });
-    res.end()
-
-   
-   
-  })
- 
-})
+app.use('/', datarouter)
 
 server.listen(process.env.PORT || 3000)
 
