@@ -88,9 +88,8 @@ exports.getMintScan = async () => {
   // Go to your site
   const addressMint = url.split("/")[5];
   await page.goto('https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae', { waitUntil: "networkidle0", timeout: 0 });
-
+  await page.waitForTimeout(10000)
   const tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", el => el.innerText);
-  await delay(10000);
   console.log(tokenMint);
   browser.close();
   return {addressMint,tokenMint}
