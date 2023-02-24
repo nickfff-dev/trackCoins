@@ -5,15 +5,13 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  <link rel="icon" href="/favicon.ico"/>
-
- </head>
-<body style="background-color:#111827; color:white; margin:0,100px">
-  <script>
- 
+ <script>
+  function getData(){
     fetch('/api/senddata',{
-
+      method: "GET",
       headers:{
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin" : "*"
       }
     }
   ).then((res)=>{
@@ -33,14 +31,17 @@
  
     
     })
-   
+   }
 
 
 
-
+getData()
 
 
   </script>
+ </head>
+<body style="background-color:#111827; color:white; margin:0,100px">
+
   
 <h1>Coin Tracker </h1>
 
