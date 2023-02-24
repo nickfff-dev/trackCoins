@@ -1,6 +1,12 @@
 const puppeteer = require("puppeteer");
 
 
+function delay(time) {
+  return new Promise(function(resolve) { 
+      setTimeout(resolve, time)
+  });
+}
+
 
 exports.getDebank = async () => {
   // Start a Puppeteer session with:
@@ -78,14 +84,15 @@ exports.getMintScan = async () => {
 
   // Create a page
   const page = await browser.newPage();
- const url ="https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae"
+  const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
   // Go to your site
+  const addressMint = url.split("/")[5];
   await page.goto('https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae', { waitUntil: "networkidle0", timeout: 0 });
-  const addressMint = url.split("/")[5]
-
+  
+  await delay(10000);
   const tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", el => el.innerText);
-  console.log(tokenMint)
-  browser.close()
+  console.log(tokenMint);
+  browser.close();
   return {addressMint,tokenMint}
 };
 
