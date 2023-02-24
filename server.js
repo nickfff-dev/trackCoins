@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 const debank = getDebank();
 const mintScan = getMintScan();
 const thorChain = getThorChain();
+app.use(cors())
 app.use('/api/senddata', (req, res) => {
 
 
