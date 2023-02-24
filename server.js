@@ -24,11 +24,11 @@ app.get('/', (req, res) => {
 
  
 })
-
-app.get('/api/senddata', (req, res) => {
-  const debank = getDebank();
+const debank = getDebank();
   const mintScan = getMintScan();
   const thorChain = getThorChain();
+app.get('/api/senddata', (req, res) => {
+  
 
   Promise.all([thorChain, mintScan, debank]).then((values) => {
     console.log(values);
