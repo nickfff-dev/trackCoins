@@ -1,20 +1,22 @@
 
 const express = require('express')
 const datarouter = express.Router();
-const { getDebank } = require("./index")
-const { getMintScan } = require('./index')
-const { getThorChain } = require('./index')
-
-
-var debank = await getDebank() 
-var mintscan = await getMintScan()
-var thorscan = await getThorChain()
+var { getDebank } = require("./index")
+var { getMintScan } = require('./index')
+var { getThorChain } = require('./index')
 
 
 
+  var debank =  getDebank() 
+var mintscan = getMintScan()
+  var thorscan =  getThorChain()
 
-datarouter.get('/api/senddata', async (req, res) => {
 
+
+
+
+datarouter.get('/api/senddata', (req, res) => {
+  
   var values = [mintscan,debank,thorscan ]
   
   
