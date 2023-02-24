@@ -10,6 +10,7 @@
   <script type="text/javascript">
 
  
+const getData = ()=>{
   fetch('https://track-coins-git-main-nickfff-dev.vercel.app/api/senddata',{
       method:'GET',
       headers:{
@@ -26,9 +27,7 @@
        item.map((kaitem)=>{
       Object.keys(kaitem).map((dataz)=>{
         document.getElementById(dataz).innerHTML = kaitem[dataz]
-      })
-        
-        
+      }) 
        })
       })
     
@@ -36,12 +35,19 @@
  
     
     })
+
+    var btndata = document.getElementById("datafet")
+    btndata.addEventListener("click",(e)=>{
+      e.preventDefault()
+      getData()
+    })
+}
  
 
   </script>
   
 <h1>Coin Tracker </h1>
-
+<button id="datafet" style="padding:10px;height:10px;">clickme</button>
 <div id="resultsContainer" style="display:flex; height: 70%; flex-direction:column; justify-items:space-between; margin:50px,auto;">
       <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between; margin-bottom:50px">
      <h1>debank</h1>
@@ -56,7 +62,6 @@
       <div style="display:flex; flex-direction:row;">address:<span></span><span id="addressThor"></span></div>
       <div style="display:flex; flex-direction:row;">balance:<span></span><span id="balanceThor"></span></div>
       <div style="display:flex; flex-direction:row;">tokens:<span></span><span id="tokenThor"></span></div>
-      
       </div>
 
       <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between;margin-bottom:50px">
