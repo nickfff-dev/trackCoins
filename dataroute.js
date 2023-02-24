@@ -6,15 +6,15 @@ const { getMintScan } = require('./index')
 const { getThorChain } = require('./index')
 
 
-
+var debank = await getDebank() 
+var mintscan = await getMintScan()
+var thorscan = await getThorChain()
 
 
 
 
 datarouter.get('/api/senddata', async (req, res) => {
-  var debank = await getDebank() 
-  var mintscan = await getMintScan()
-  var thorscan = await getThorChain()
+
   var values = [mintscan,debank,thorscan ]
   
   

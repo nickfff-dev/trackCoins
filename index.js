@@ -14,7 +14,7 @@ exports.getDebank = async () => {
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--start-maximized', '--no-sandbox'],
+    args: ['--no-sandbox'],
     defaultViewport:false
   });
 
@@ -35,7 +35,6 @@ exports.getDebank = async () => {
 
 
   
-  browser.close();
 
   return {debankaddress,debankwallet,phuture,gmX,camelot}
 
@@ -48,7 +47,7 @@ exports.getThorChain = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--start-maximized', '--no-sandbox'],
+    args: [ '--no-sandbox'],
     defaultViewport: false
   });
 
@@ -66,7 +65,6 @@ exports.getThorChain = async () => {
   const tokenThor = weza?.split("(")[0]
 
   console.log(weza);
-  browser.close();
   return {addressThor,balanceThor,tokenThor}
 
 };
@@ -78,7 +76,7 @@ exports.getMintScan = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--start-maximized', '--no-sandbox'],
+    args: ['--no-sandbox'],
     defaultViewport: false
   });
 
@@ -88,10 +86,12 @@ exports.getMintScan = async () => {
   // Go to your site
   const addressMint = url.split("/")[5];
   await page.goto('https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae', { waitUntil: "networkidle0", timeout: 0 });
-  await page.waitForTimeout(10000)
-  const tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", el => el.innerText);
+  
+  var tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", el => el.innerText);
+  if (tokenMint === "0") {
+     tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", el => el.innerText)
+   }
   console.log(tokenMint);
-  browser.close();
   return {addressMint,tokenMint}
 };
 
