@@ -42,7 +42,7 @@ exports.getThorChain = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--start-maximized'],
+    args: ['--start-maximized', '--no-sandbox'],
     defaultViewport: false
   });
 
@@ -72,7 +72,7 @@ exports.getMintScan = async () => {
   // Launch the browser
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--start-maximized'],
+    args: ['--start-maximized', '--no-sandbox'],
     defaultViewport: false
   });
 
