@@ -16,25 +16,24 @@ datarouter.get('/api/getmintscan', (req, res) => {
 
   await page.goto(url, { waitUntil: "networkidle0", timeout: 0 })
   console.log("waited")
-  var values = []
+
   var addressMint = url.split('/')[5]
-  var tokenMint;
+  var tokenMint = "";
   page.waitForXPath("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div", {
     visible:true,
     timeout:0
   }).then((data) => {
-    page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div").then((info) => {
+    page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]").then((info) => {
      
-        page.evaluate((el)=> el.innerText, kitu[0]).then((resul)=>{console.log(resul)})
+      page.evaluate((el) => el.innerText, info[0]).then((resul) => {
+        tokenMint = resul
+        console.log(resul)
+      })
   
     })
 
-      values.push(addressMint)
-    page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd", (el) => el.innerText).then((item) => {
-      console.log(item) 
-      tokenMint = item
-     })
-    values.push(tokenMint)
+
+    
     console.log({addressMint,tokenMint})
    
    
@@ -46,7 +45,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
     
 
 
-    res.send({ data: values });
+    res.send({ addressMint,tokenMint});
    
   
 
