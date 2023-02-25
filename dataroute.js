@@ -41,7 +41,9 @@ datarouter.get('/api/getmintscan', (req, res) => {
    
   })
   console.log(values)
+  if (values.length > 1) {
     res.send(values);
+   }
    
   
 
