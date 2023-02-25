@@ -34,7 +34,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
 
 
     
-    console.log({addressMint,tokenMint})
+    
    
    
   })

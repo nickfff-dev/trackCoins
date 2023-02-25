@@ -20,8 +20,29 @@
     ).then((res)=>{
       var mintprice = 0;
       res.json().then((data)=>{
-       fetch("https://api.mintscan.io/v2/utils/market/prices?currency=usd",
-       {method:"GET"}).then((res)=>{
+
+
+        fetch("https://api.mintscan.io/v2/utils/market/prices?currency=usd", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://hub.mintscan.io/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+})
+       
+       
+       .then((res)=>{
         res.json().then((manu)=>{
          var pricearra = manu.filter((kamanu)=>{
             kamanu.coinGeckoId === "cosmos"
@@ -111,7 +132,7 @@ fetch("https://midgard.ninerealms.com/v2/stats",{
      document.getElementById("usd_value").innerHTML = datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1];
      document.getElementById("wallet_usd_value").innerHTML  = Number(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1]) - total;
      var d = new Date(0);
-    document.getElementById('timestamp').innerHTML = new Date(d.setUTCSeconds(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][0]));
+    document.getElementById('timestamp').innerHTML = new Date(d.setUTCSeconds(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][0])).toUTCString();
    })})
 </script>
 
