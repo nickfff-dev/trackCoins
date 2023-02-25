@@ -27,7 +27,8 @@ datarouter.get('/api/getmintscan', (req, res) => {
     if (data) {
       values.push(addressMint)
     page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd", (el) => el.innerText).then((item) => {
-       tokenMint = item
+      console.log(item) 
+      tokenMint = item
      })
     values.push(tokenMint)
     console.log({addressMint,tokenMint})
