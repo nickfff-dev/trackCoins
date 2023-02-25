@@ -27,7 +27,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
   }).then((data) => {
     page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]").then((info) => {
      
-      page.evaluate((el) => el.innerText, kitu[0]).then((resul) => {
+      page.evaluate((el) => el.innerText, info[0]).then((resul) => {
         console.log(resul)
         values.push(resul)
       })
