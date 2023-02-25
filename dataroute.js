@@ -15,6 +15,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
   const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
 
   await page.goto(url, { waitUntil: "networkidle0", timeout: 0 })
+  console.log("waited")
   var values = []
   page.waitForSelector("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountTokens_container__1-HuH > div > div.TokenCards_container__3m0Jv > div > div > div").then( async() => {
     const addressMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_address__2WY10.AccountInfo_cursor__1Nv86", el => el.innerText);
