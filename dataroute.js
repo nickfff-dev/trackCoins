@@ -18,7 +18,9 @@ datarouter.get('/api/getmintscan', (req, res) => {
   console.log("waited")
 
   var addressMint = url.split('/')[5]
-  var tokenMint = "";
+
+  var values = [];
+  values.push(addressMint)
   page.waitForXPath("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div", {
     visible:true,
     timeout:0
@@ -26,8 +28,8 @@ datarouter.get('/api/getmintscan', (req, res) => {
     page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]").then((info) => {
      
       page.evaluate((el) => el.innerText, info[0]).then((resul) => {
-        tokenMint.concat(resul)
-        console.log(tokenMint)
+        console.log(resul)
+        values.push(resul)
       })
   
     })
@@ -38,14 +40,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
    
    
   })
-  
-
-
-   
-    
-
-
-    res.send({ addressMint,tokenMint});
+    res.send(values);
    
   
 

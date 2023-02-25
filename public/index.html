@@ -8,21 +8,8 @@
 </head>
  <body style="background-color:#111827; color:white; margin:0,100px">
   <script>
-    function getMint(){
-    
-      fetch('/api/getmintscan',{
-        method: "GET",
-        headers:{
-          "content-type": "application/json",
-          "Access-Control-Allow-Origin" : "*"   
-        }
-      }
-    ).then((res)=>{
-      var mintprice = 0;
-      res.json().then((data)=>{
-
-
-        fetch("https://api.mintscan.io/v2/utils/market/prices?currency=usd", {
+    var mintprice =0;
+         fetch("https://api.mintscan.io/v2/utils/market/prices?currency=usd", {
   "headers": {
     "accept": "application/json, text/plain, */*",
     "accept-language": "en-US,en;q=0.9",
@@ -50,9 +37,26 @@
           mintprice += pricearra.current_price
         })
        })
-     document.getElementById("addressMint").innerHTML = data.addressMint;
+  </script>
+  <script>
+    function getMint(){
+    
+      fetch('/api/getmintscan',{
+        method: "GET",
+        headers:{
+          "content-type": "application/json",
+          "Access-Control-Allow-Origin" : "*"   
+        }
+      }
+    ).then((res)=>{
+     
+      res.json().then((data)=>{
 
-     document.getElementById("tokenMint").innerHTML = Number(data.tokenMint) * mintprice;
+
+   
+     document.getElementById("addressMint").innerHTML = data[0];
+
+     document.getElementById("tokenMint").innerHTML = Number(data[1]) * mintprice;
       
       })
    
