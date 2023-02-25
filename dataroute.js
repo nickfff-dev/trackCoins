@@ -15,7 +15,7 @@ datarouter.get('/api/getdebank', (req, res) => {
   browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], defaultViewport: false});
   const [page] = await browser.pages();
   const ua = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36";
-  await page.setExtraHTTPHeaders({"Accept-Language": "en-US,en;q=0.9", "account": '{"random_at":1677074028,"random_id":"2d03188e57ce40758aa895f86ffbd685","user_addr":null}'});
+  await page.setExtraHTTPHeaders({"Accept-Language": "en-US,en;q=0.9"});
   await page.setUserAgent(ua);
   const url = "https://debank.com/profile/0xf99d8717c3c2bb5a4959fab7f152eddee56580e2";
   await page.goto(url,  { waitUntil: "networkidle0",timeout:0});
