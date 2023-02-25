@@ -29,7 +29,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
      
       page.evaluate((el) => el.innerText, info[0]).then((resul) => {
         console.log(resul)
-        values.push(resul)
+       res.send([addressMint, resul])
       })
   
     })
@@ -40,10 +40,8 @@ datarouter.get('/api/getmintscan', (req, res) => {
    
    
   })
-  console.log(values)
-  if (values.length > 1) {
-    res.send(values);
-   }
+
+
    
   
 
