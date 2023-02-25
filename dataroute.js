@@ -2,15 +2,12 @@
 const express = require('express')
 const datarouter = express.Router();
 const puppeteer = require("puppeteer");
-const { getMintScan } = require('./index')
+
 
 
 
 let browser;
 datarouter.get('/api/getmintscan', (req, res) => {
-
-
- 
 (async () => {
   browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], defaultViewport: false});
   const [page] = await browser.pages();
