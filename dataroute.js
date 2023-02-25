@@ -13,7 +13,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
   const page = await browser.newPage();
   
   const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
-  await page.goto(url, { waitUntil: "networkidle2", timeout:0})
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout:0})
   
   const lastReq = await page.waitForRequest((request) => { request.url() === "https://lcd-cosmos.cosmostation.io/cosmos/bank/v1beta1/balances/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae?pagination.limit=1000" });
   if (lastReq.response() && lastReq.response()?.ok()) {
