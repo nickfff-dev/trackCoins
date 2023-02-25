@@ -23,8 +23,10 @@ datarouter.get('/api/getmintscan', (req, res) => {
     visible:true,
     timeout:0
   }).then((data) => {
-    page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div").then((info) => {
-      console.log(info)
+    page.$x("/main/section/div/div[3]/section[2]/div/div[2]/div").then((info) => {
+      info.forEach((kitu) => {
+        page.evaluate((el)=> el.innerText, kitu).then((resul)=>{console.log(resul)})
+      })
     })
 
       values.push(addressMint)
