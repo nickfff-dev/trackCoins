@@ -27,7 +27,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
     }
     return el.innerText
   });
-  const values = {addressMint,tokenMint}
+  const values = [addressMint,tokenMint]
   res.send({ data: values });
  
 })()
