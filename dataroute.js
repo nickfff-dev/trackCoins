@@ -17,30 +17,21 @@ datarouter.get('/api/getmintscan', (req, res) => {
   await page.goto(url, { waitUntil: "networkidle0", timeout: 0 })
   console.log("waited")
 
-  var addressMint = url.split('/')[5]
+  const addressMint = url.split('/')[5]
 
-  var values = [];
-  values.push(addressMint)
-  page.waitForXPath("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div", {
+  const values = [addressMint];
+
+ const handleme =await page.waitForXPath("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]", {
     visible:true,
     timeout:0
-  }).then((data) => {
-    page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]").then((info) => {
-     
-      page.evaluate((el) => el.innerText, info[0]).then((resul) => {
-        console.log(resul)
-       res.send([addressMint, resul])
-      })
-  
-    })
-
-
-    
-    
-   
-   
   })
+  const tokenMint = await page.evaluate((el) => el.innerText, handleme)
+  
 
+
+  if (addressMint && tokenMint) {
+  res.send([addressMint, tokenMint])
+}
 
    
   
