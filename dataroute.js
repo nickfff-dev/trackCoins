@@ -4,7 +4,11 @@ const datarouter = express.Router();
 const puppeteer = require("puppeteer");
 
 
-
+function delay(time) {
+  return new Promise(function(resolve) { 
+      setTimeout(resolve, time)
+  });
+}
 
 let browser;
 datarouter.get('/api/getmintscan', (req, res) => {
