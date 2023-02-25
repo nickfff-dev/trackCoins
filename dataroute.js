@@ -23,8 +23,10 @@ datarouter.get('/api/getmintscan', (req, res) => {
     visible:true,
     timeout:0
   }).then((data) => {
-    
-    if (data) {
+    page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div").then((info) => {
+      console.log(info)
+    })
+
       values.push(addressMint)
     page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd", (el) => el.innerText).then((item) => {
       console.log(item) 
@@ -32,7 +34,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
      })
     values.push(tokenMint)
     console.log({addressMint,tokenMint})
-   }
+   
    
   })
   
