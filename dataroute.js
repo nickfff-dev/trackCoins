@@ -23,8 +23,9 @@ datarouter.get('/api/getmintscan', (req, res) => {
       Promise.all([await delay(40000)]).then(() => {
         console.log("waited")
       })
-      return el.innerText
+      
     }
+    return el.innerText
   });
   const values = {addressMint,tokenMint}
   res.send({ data: values });
