@@ -44,92 +44,91 @@ getMint();
   </script>
 
 
-  <script>
-       function getThor(){
-    fetch('/api/getthorchain',{
-      method: "GET",
-      headers:{
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin" : "*"
-      }
-    }
-  ).then((res)=>{
-  
-    res.json().then((data)=>{
-     
-     Object.values(data).map((item)=>{
-      
-       item.map((kaitem)=>{
-      Object.keys(kaitem).map((dataz)=>{
-        document.getElementById(dataz).innerHTML = kaitem[dataz]
-      }) 
-       })
+<script>
+  var url2 ="https://thornode.ninerealms.com/bank/balances/thor1pjy3skfpynxwane8m3gp203ud46vwyc98qeq4q";
+ fetch(url2, {
+"headers": {
+  "accept": "application/json, text/plain, */*",
+  "accept-language": "en-US,en;q=0.9",
+  "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
+  "sec-ch-ua-mobile": "?1",
+  "sec-ch-ua-platform": "\"Android\"",
+  "sec-fetch-dest": "empty",
+  "sec-fetch-mode": "cors",
+  "sec-fetch-site": "cross-site"
+},
+"referrer": "https://thorchain.net/",
+"referrerPolicy": "strict-origin-when-cross-origin",
+"body": null,
+"method": "GET",
+"mode": "cors",
+"credentials": "omit"
+}).then((res)=>res.json().then((data)=>{
+
+var runAmount = data.result[0].amount / 100000000
+document.getElementById("addressThor").innerHTML=url2.split("/")[5];
+document.getElementById("tokenThor").innerHTML = runAmount.toFixed(2)
+console.log("THOR", data.result[0].amount)
+var url3 = "https://midgard.ninerealms.com/v2/stats"
+fetch("https://midgard.ninerealms.com/v2/stats",{
+  method:"GET"
+}).then((res)=>res.json().then((info)=>{
+  var thorPrice = Number(info.runePriceUSD);
+  document.getElementById("balanceThor").innerHTML = (runAmount * thorPrice).toFixed(2)
+}))
+}))
+</script>
+<script>
+  fetch("https://api.debank.com/portfolio/project_list?user_addr=0xf99d8717c3c2bb5a4959fab7f152eddee56580e2",{
+    method:"GET",
+
+  }).then((res)=>{res.json().then(
+    (data)=>{
+      data.data.forEach((obj)=>{
+       document.getElementById(`${obj.name.toLowerCase()}`).innerHTML= obj.portfolio_item_list[0].stats.asset_usd_value;
+        console.log(obj.portfolio_item_list[0].stats.asset_usd_value,obj.name)
       })
-    
-    })
- 
-    
-    })
-   };
-   getThor();
-  </script>
-
-    <script>
-      function getDeBank(){
-   fetch('/api/getdebank',{
-     method: "GET",
-     headers:{
-       "content-type": "application/json",
-       "Access-Control-Allow-Origin" : "*"
-     }
-   }
- ).then((res)=>{
- 
-   res.json().then((data)=>{
-    
-    Object.values(data).map((item)=>{
      
-      item.map((kaitem)=>{
-     Object.keys(kaitem).map((dataz)=>{
-       document.getElementById(dataz).innerHTML = kaitem[dataz]
-     }) 
-      })
-     })
-   
-   })
+    })})
+</script>
+<script>
+  var url = "https://api.debank.com/user/addr?addr=0xf99d8717c3c2bb5a4959fab7f152eddee56580e2";
+  fetch(url,{
+    method:"GET"
+  }).then((res)=>{res.json().then(
+    (data)=>{
+      document.getElementById("debankaddress").innerHTML = url.split("=")[1];
+      document.getElementById("wallet_usd_value").innerHTML = data.data.wallet_usd_value;
+      document.getElementById("usd_value").innerHTML = data.data.usd_value;
+     
+    
+    })})
+</script>
 
-   
-   })
-  };
-  getDeBank();
- </script>
- </head>
-<body style="background-color:#111827; color:white; margin:0,100px">
-
-  
 <h1>Coin Tracker </h1>
 
 <div id="resultsContainer" style="display:flex; height: 70%; flex-direction:column; justify-items:space-between; margin:50px,auto;">
-      <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between; margin-bottom:50px">
-     <h1>debank</h1>
-     <div style="display:flex; flex-direction:row;">address:<span></span><span id="debankaddress"></span></div>
-     <div style="display:flex; flex-direction:row;">Wallet:<span></span><span id="debankwallet"></span></div>
-     <div style="display:flex; flex-direction:row;">Phuture:<span></span><span id="phuture"></span></div>
-     <div style="display:flex; flex-direction:row;">GMX:<span></span><span id="gmX"></span></div>
-     <div style="display:flex; flex-direction:row;">Camelot:<span></span><span id="camelot"></span></div>
-     </div>
-     <div  style="display:flex; flex-direction:column;justify-content:space-between;margin-bottom:50px">
-      <h1>thorchain</h1>
-      <div style="display:flex; flex-direction:row;">address:<span></span><span id="addressThor"></span></div>
-      <div style="display:flex; flex-direction:row;">balance:<span></span><span id="balanceThor"></span></div>
-      <div style="display:flex; flex-direction:row;">tokens:<span></span><span id="tokenThor"></span></div>
-      </div>
+    <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between; margin-bottom:50px">
+   <h1>debank</h1>
+   <div style="display:flex; flex-direction:row;">address:<span></span><span id="debankaddress"></span></div>
+   <div style="display:flex; flex-direction:row;">Wallet:<span></span><span id="wallet_usd_value"></span></div>
+   <div style="display:flex; flex-direction:row;">Phuture:<span></span><span id="phuture"></span></div>
+   <div style="display:flex; flex-direction:row;">GMX:<span></span><span id="gmx"></span></div>
+   <div style="display:flex; flex-direction:row;">Camelot:<span></span><span id="camelot"></span></div>
+   <div style="display:flex; flex-direction:row;">total:<span></span><span id="usd_value"></span></div>
+   </div>
+   <div  style="display:flex; flex-direction:column;justify-content:space-between;margin-bottom:50px">
+    <h1>thorchain</h1>
+    <div style="display:flex; flex-direction:row;">address:<span></span><span id="addressThor"></span></div>
+    <div style="display:flex; flex-direction:row;">balance:<span></span><span id="balanceThor"></span></div>
+    <div style="display:flex; flex-direction:row;">tokens:<span></span><span id="tokenThor"></span></div>
+    </div>
 
-      <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between;margin-bottom:50px">
-        <h1>Mintscan</h1>
-        <div style="display:flex; flex-direction:row;">address:<span></span><span id="addressMint"></span></div>
-        <div style="display:flex; flex-direction:row;">balance:<span></span><span id="tokenMint"></span></div>
-        </div>
-  <div>
+    <div style="background:#111827; display:flex; flex-direction:column;justify-content:space-between;margin-bottom:50px">
+      <h1>Mintscan</h1>
+      <div style="display:flex; flex-direction:row;">address:<span></span><span id="addressMint">${addressMint}</span></div>
+      <div style="display:flex; flex-direction:row;">balance:<span></span><span id="tokenMint">${tokenvalue}</span></div>
+      </div>
+<div>
 </body>
 </html>
