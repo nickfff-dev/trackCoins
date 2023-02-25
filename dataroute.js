@@ -26,9 +26,9 @@ datarouter.get('/api/getdebank', (req, res) => {
   const camelot = await page.$eval('#root > div > div.DesktopFrame_mainContainer__2V8Re > div.container_mainSubContainer__39U6P > div.DesktopContainer_main__MG15v.container_pageCenterSubContainer__3encx > div > div.Portfolio_collect__j-mVa.card_suspend__2DfyT.card_card__i5VM9 > div.Portfolio_projectGrid__ZYks1 > div:nth-child(4) > div > div.ProjectCell_assetsItemName__dqjfm > div.ProjectCell_assetsItemWorth__o2_hJ', el => el.innerText)
 
 
-  
+  const values =[debankaddress,debankwallet,phuture,gmX,camelot]
 
-  res.send({ data: {debankaddress,debankwallet,phuture,gmX,camelot} });
+  res.send({ data: values });
  
 })()
   .catch(err => console.error(err))
