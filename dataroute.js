@@ -4,11 +4,7 @@ const datarouter = express.Router();
 const puppeteer = require("puppeteer");
 
 
-function delay(time) {
-  return new Promise(function(resolve) { 
-      setTimeout(resolve, time)
-  });
-}
+
 
 let browser;
 datarouter.get('/api/getmintscan', (req, res) => {
@@ -19,19 +15,21 @@ datarouter.get('/api/getmintscan', (req, res) => {
   const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
   await page.goto(url,  { waitUntil: "networkidle0",timeout:0});
   const addressMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_address__2WY10.AccountInfo_cursor__1Nv86", el => el.innerText);
-  const tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)", async (el) => {
-    if (Number(el.innerText) < 1) {
+  const tokenMint = await page.$eval("#__next > main > section > div > div.Account_container__pc9IN > section.Section_container__3OCWW.AccountInfo_container__1RRgK > div.AccountInfo_totalValueWrapper__2Da_d > div.AccountInfo_totalValue__E0ehd > span:nth-child(1)",  (el) => {
+    var ele = "";
       var myprom =new Promise(function(resolve) { 
         setTimeout(resolve, 40000)
     })
       Promise.all([myprom]).then(() => {
         console.log("waited")
+        ele = el.innerText;
       })
       
-    }
-    return el.innerText
+    return ele
+    
   });
-  const values = [addressMint,tokenMint]
+  const values = [addressMint, tokenMint]
+  console.log(values)
   res.send({ data: values });
  
 })()

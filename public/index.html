@@ -13,7 +13,7 @@
       method: "GET",
       headers:{
         "content-type": "application/json",
-        "Access-Control-Allow-Origin" : "*"
+        "Access-Control-Allow-Origin" : "*"   
       }
     }
   ).then((res)=>{
@@ -81,30 +81,32 @@ fetch("https://midgard.ninerealms.com/v2/stats",{
 }))
 </script>
 <script>
-  fetch("https://api.debank.com/portfolio/project_list?user_addr=0xf99d8717c3c2bb5a4959fab7f152eddee56580e2",{
-    method:"GET",
+  var total = 0;
+ fetch("https://api.debank.com/portfolio/project_list?user_addr=0xf99d8717c3c2bb5a4959fab7f152eddee56580e2",{
+   method:"GET",
 
-  }).then((res)=>{res.json().then(
-    (data)=>{
-      data.data.forEach((obj)=>{
-       document.getElementById(`${obj.name.toLowerCase()}`).innerHTML= obj.portfolio_item_list[0].stats.asset_usd_value;
-        console.log(obj.portfolio_item_list[0].stats.asset_usd_value,obj.name)
-      })
-     
-    })})
-</script>
-<script>
-  var url = "https://api.debank.com/user/addr?addr=0xf99d8717c3c2bb5a4959fab7f152eddee56580e2";
-  fetch(url,{
-    method:"GET"
-  }).then((res)=>{res.json().then(
-    (data)=>{
-      document.getElementById("debankaddress").innerHTML = url.split("=")[1];
-      document.getElementById("wallet_usd_value").innerHTML = data.data.wallet_usd_value;
-      document.getElementById("usd_value").innerHTML = data.data.usd_value;
-     
+ }).then((res)=>{res.json().then(
+   
+   (data)=>{
     
-    })})
+     data.data.forEach((obj)=>{
+       total += Number(obj.portfolio_item_list[0].stats.asset_usd_value)
+      document.getElementById(`${obj.name.toLowerCase()}`).innerHTML= obj.portfolio_item_list[0].stats.asset_usd_value;
+    
+     })
+    
+   })});
+
+   var url = "https://api.debank.com/asset/net_curve_24h?user_addr=0xf99d8717c3c2bb5a4959fab7f152eddee56580e2";
+ fetch(url,{
+   method:"GET"
+ }).then((res)=>{res.json().then(
+   (datamain)=>{
+     console.log(datamain)
+     document.getElementById("debankaddress").innerHTML = url.split("=")[1];
+     document.getElementById("usd_value").innerHTML = datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1];
+     document.getElementById("wallet_usd_value").innerHTML  = Number(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1]) - total
+   })})
 </script>
 
 <h1>Coin Tracker </h1>
