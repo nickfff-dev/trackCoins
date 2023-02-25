@@ -105,7 +105,9 @@ fetch("https://midgard.ninerealms.com/v2/stats",{
      console.log(datamain)
      document.getElementById("debankaddress").innerHTML = url.split("=")[1];
      document.getElementById("usd_value").innerHTML = datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1];
-     document.getElementById("wallet_usd_value").innerHTML  = Number(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1]) - total
+     document.getElementById("wallet_usd_value").innerHTML  = Number(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1]) - total;
+     var d = new Date(0);
+    document.getElementById('timestamp').innerHTML = new Date(d.setUTCSeconds(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][0]));
    })})
 </script>
 
