@@ -7,43 +7,38 @@
  <link rel="icon" href="/favicon.ico"/>
 </head>
  <body style="background-color:#111827; color:white; margin:0,100px">
- <script>
-  function getMint(){
-    fetch('/api/getmintscan',{
-      method: "GET",
-      headers:{
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin" : "*"   
+  <script>
+    function getMint(){
+      fetch('/api/getmintscan',{
+        method: "GET",
+        headers:{
+          "content-type": "application/json",
+          "Access-Control-Allow-Origin" : "*"   
+        }
       }
-    }
-  ).then((res)=>{
-  
-    res.json().then((data)=>{
-     
-     Object.values(data).map((item)=>{
+    ).then((res)=>{
+    
+      res.json().then((data)=>{
+       
+     document.getElementById("addressMint").innerHTML = data.addressMint;
+
+     document.getElementById("tokenMint").innerHTML = data.tokenMint;
       
-       item.map((kaitem)=>{
-      Object.keys(kaitem).map((dataz)=>{
-        document.getElementById(dataz).innerHTML = kaitem[dataz]
-      }) 
-       })
       })
-    
-    })
- 
-    
-    })
-   };
-
-
-
-
-
-
-getMint();
-
-
-  </script>
+   
+      
+      })
+     };
+  
+  
+  
+  
+  
+  
+  getMint();
+  
+  
+    </script>
 
 
 <script>
