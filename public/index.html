@@ -9,6 +9,7 @@
  <body style="background-color:#111827; color:white; margin:0,100px">
   <script>
     function getMint(){
+    
       fetch('/api/getmintscan',{
         method: "GET",
         headers:{
@@ -17,12 +18,20 @@
         }
       }
     ).then((res)=>{
-    
+      var mintprice = 0;
       res.json().then((data)=>{
-       
+       fetch("https://api.mintscan.io/v2/utils/market/prices?currency=usd",
+       {method:"GET"}).then((res)=>{
+        res.json().then((manu)=>{
+         var pricearra = manu.filter((kamanu)=>{
+            kamanu.coinGeckoId === "cosmos"
+          })
+          mintprice += pricearra.current_price
+        })
+       })
      document.getElementById("addressMint").innerHTML = data.addressMint;
 
-     document.getElementById("tokenMint").innerHTML = data.tokenMint;
+     document.getElementById("tokenMint").innerHTML = Number(data.tokenMint) * mintprice;
       
       })
    

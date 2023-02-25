@@ -26,8 +26,8 @@ datarouter.get('/api/getmintscan', (req, res) => {
     page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]").then((info) => {
      
       page.evaluate((el) => el.innerText, info[0]).then((resul) => {
-        tokenMint = resul
-        console.log(resul)
+        tokenMint.concat(resul)
+        console.log(tokenMint)
       })
   
     })
