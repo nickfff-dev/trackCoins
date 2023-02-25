@@ -19,19 +19,23 @@ datarouter.get('/api/getmintscan', (req, res) => {
 
   const addressMint = url.split('/')[5]
 
-  const values = [addressMint];
 
  const handleme =await page.waitForXPath("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[1]", {
     visible:true,
     timeout:0
   })
-  const tokenMint = await page.evaluate((el) => el.innerText, handleme)
+  const tokenBalance = await page.evaluate((el) => el.innerText, handleme)
   
+  if (tokenBalance && tokenBalance.length) {
+    const trybalance = await page.$x("/html/body/div/main/section/div/div[3]/section[1]/div[4]/div[2]/span[1]")
+    const tokenMint = await page.evaluate((eltwo) => eltwo.innerText, trybalance[0])
+   
+      res.send([addressMint, tokenMint])
+    
+  }
 
 
-  if (addressMint && tokenMint) {
-  res.send([addressMint, tokenMint])
-}
+
 
    
   
