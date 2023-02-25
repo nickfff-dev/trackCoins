@@ -6,16 +6,16 @@ const { getMintScan } = require('./index')
 const { getThorChain } = require('./index')
 
 
-
+let browser;
 datarouter.get('/api/getdebank', (req, res) => {
 
 
-  let browser
+ 
 (async () => {
   browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], defaultViewport: false});
   const [page] = await browser.pages();
-  const ua = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36";
-  await page.setExtraHTTPHeaders({"Accept-Language": "en-US,en;q=0.9"});
+  const ua = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Mobile Safari/537.36";
+  await page.setExtraHTTPHeaders({"Accept-Language": "en-US,en;q=0.9" ,"cookie":"_gid=GA1.2.2086014272.1677258577; __cuid=d42818fbe4f5436fbe032118ae92a23c; amp_fef1e8=18b6c936-45d5-4ae5-abdc-19e978097d6cR...1gq2d92ge.1gq2d92gi.1.0.1; _ga=GA1.2.658206106.1677074030; _gat_gtag_UA_160311039_1=1; _ga_XCH1EEPRPW=GS1.1.1677332542.10.1.1677334276.0.0.0"});
   await page.setUserAgent(ua);
   const url = "https://debank.com/profile/0xf99d8717c3c2bb5a4959fab7f152eddee56580e2";
   await page.goto(url,  { waitUntil: "networkidle0",timeout:0});
@@ -27,7 +27,7 @@ datarouter.get('/api/getdebank', (req, res) => {
 
 
   const values =[debankaddress,debankwallet,phuture,gmX,camelot]
-
+  
   res.send({ data: values });
  
 })()
