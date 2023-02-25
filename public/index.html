@@ -121,7 +121,7 @@ fetch("https://midgard.ninerealms.com/v2/stats",{
     
      data.data.forEach((obj)=>{
        total += Number(obj.portfolio_item_list[0].stats.asset_usd_value)
-      document.getElementById(`${obj.name.toLowerCase()}`).innerHTML= obj.portfolio_item_list[0].stats.asset_usd_value;
+      document.getElementById(`${obj.name.toLowerCase()}`).innerHTML= obj.portfolio_item_list[0].stats.asset_usd_value.toFixed(2);
     
      })
     
