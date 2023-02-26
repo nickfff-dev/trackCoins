@@ -4,14 +4,10 @@ const datarouter = express.Router();
 const puppeteer = require("puppeteer");
 
 
-function delay(time) {
-  return new Promise(function(resolve) { 
-      setTimeout(resolve, time)
-  });
-};
+
 
 datarouter.get('/api/getmintscan', (req, res) => {
-(async () => {
+async () => {
  var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
   const page = await browser.newPage();
   
@@ -33,7 +29,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
     
    
       res.send([addressMint, tokenBalance]);
-   
+      
     } 
     
   
@@ -45,8 +41,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
   
 
  
-})()
-  .catch(err => console.error(err))
+}
  
       
  })
@@ -55,7 +50,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
 
 
  datarouter.get('/api/getpricemintscan', (req, res) => {
-  (async () => {
+  async () => {
    var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
     const page = await browser.newPage();
     
@@ -86,9 +81,8 @@ datarouter.get('/api/getmintscan', (req, res) => {
     
   
    
-  })()
-    .catch(err => console.error(err))
-   
+  }
+    
         
    })
 
