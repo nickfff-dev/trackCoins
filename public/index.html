@@ -18,7 +18,7 @@
  }).then((res)=>{
   res.text().then((item)=>{
     console.log(item.replace("$", ""))
-    mintprice = Number(item.replace("$", ""))
+    window.mintprice = Number(item.replace("$", ""))
 
   })
  })
@@ -41,11 +41,9 @@
    
      document.getElementById("addressMint").innerHTML = data[0];
 
-  if(mintprice != 0){
-    document.getElementById("tokenMint").innerHTML = Number((data[1])) * mintprice
-  }else{
-    document.getElementById("tokenMint").innerHTML = (data[1]);
-  }
+
+    document.getElementById("tokenMint").innerHTML = Number((data[1])) * window.mintprice;
+  
       
       })
    
@@ -122,8 +120,8 @@ fetch("https://midgard.ninerealms.com/v2/stats",{
    (datamain)=>{
      console.log(datamain)
      document.getElementById("debankaddress").innerHTML = url.split("=")[1];
-     document.getElementById("usd_value").innerHTML = datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1];
-     document.getElementById("wallet_usd_value").innerHTML  = Number(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1]) - total;
+     document.getElementById("usd_value").innerHTML = datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1].toFixed(2);
+     document.getElementById("wallet_usd_value").innerHTML  = (Number(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][1]) - total).toFixed(2);
      var d = new Date(0);
     document.getElementById('timestamp').innerHTML = new Date(d.setUTCSeconds(datamain.data.usd_value_list[(datamain.data.usd_value_list.length-1)][0])).toUTCString();
    })})
