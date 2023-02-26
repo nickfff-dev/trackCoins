@@ -27,14 +27,14 @@ datarouter.get('/api/getmintscan', (req, res) => {
   const tokenBalance = await page.evaluate((el) => el.innerText, handleme)
   
   if (tokenBalance && tokenBalance.length) {
-    var trybalance = await page.$x("/html/body/div/main/section/div/div[3]/section[1]/div[4]/div[2]/span[1]")
+    var trybalance = await page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[2]")
     var tokenMint = await page.evaluate((eltwo) => eltwo.dataset.tip, trybalance[0])
     console.log(tokenMint)
    
     if (Number(tokenMint) > 1) {
       res.send([addressMint, tokenBalance])
     } else {
-      trybalance = await page.$x("/html/body/div/main/section/div/div[3]/section[1]/div[4]/div[2]/span[1]")
+      trybalance = await page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[2]")
       tokenMint = await page.evaluate((eltwo) => eltwo.dataset.tip, trybalance[0])
       console.log(tokenMint)
       res.send([addressMint, tokenBalance])
