@@ -12,7 +12,7 @@ function delay(time) {
 let browser;
 datarouter.get('/api/getmintscan', (req, res) => {
 (async () => {
-  browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
+  browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
   const page = await browser.newPage();
   
   const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
@@ -31,11 +31,16 @@ datarouter.get('/api/getmintscan', (req, res) => {
   
   if (tokenBalance && tokenBalance.length) {
     
-    var tokenHandler = await page.$x("/html/body/div/main/div[5]/div/div[2]/div[1]/span");
+    var tokenHandler = await page.waitForXPath("/html/body/div/main/div[5]/div/div[2]/div[1]/span",{
+      visible:true,
+      timeout:0
+    });
     var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenHandler[0]);
-    var balance = Number(tokenBalance) * Number(tokenPrice.replace("$", ""));
-    console.log(balance);
-    res.send([addressMint, balance]);
+    if (tokenPrice && tokenPrice.length) {
+      var balance = Number(tokenBalance) * Number(tokenPrice.replace("$", ""));
+      console.log(balance);
+      res.send([addressMint, balance]);
+   }
     } 
     
   
