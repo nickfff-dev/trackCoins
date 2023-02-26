@@ -31,15 +31,8 @@ datarouter.get('/api/getmintscan', (req, res) => {
   
   if (tokenBalance && tokenBalance.length) {
     
-    const tokenHandler = await document.waitForXPath("/html/body/div/main/div[5]/div/div[2]/div[1]/span",{
-      timeout:0
-    });
-    console.log(tokenHandler)
-    const tokenPrice =  document.evaluate((eltwo) => eltwo.innerText, tokenHandler);
- 
-      const balance = Number(tokenBalance) * Number(tokenPrice?.replace("$", ""));
-      console.log(balance);
-      res.send([addressMint, balance]);
+   
+      res.send([addressMint, tokenBalance]);
    
     } 
     
