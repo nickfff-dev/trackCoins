@@ -7,38 +7,21 @@
  <link rel="icon" href="/favicon.ico"/>
 </head>
  <body style="background-color:#111827; color:white; margin:0,100px">
-  <!-- <script>
+  <script>
     var mintprice =0;
-         fetch("https://api.mintscan.io/v2/utils/market/prices?currency=usd", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-origin": "https://http-nodejs-production-f33d.up.railway.app/",
-    "accept-language": "en-US,en;q=0.9",
-    "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site"
-  },
-  "referrer": "https://hub.mintscan.io/",
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": null,
-  "method": "GET",
-  "mode": "cors",
-  "credentials": "omit"
-})
-       
-       
-       .then((res)=>{
-        res.json().then((manu)=>{
-         var pricearra = manu.filter((kamanu)=>{
-            kamanu.coinGeckoId === "cosmos"
-          })
-          mintprice += pricearra.current_price
-        })
-       })
-  </script> -->
+ fetch("/api/getpricemintscan",{
+  method:"GET",
+  headers:{
+          "content-type": "text/plain",
+          "Access-Control-Allow-Origin" : "*"   
+        }
+ }).then((res)=>{
+  res.text().then((item)=>{
+    console.log(item)
+    
+  })
+ })
+  </script>
   <script>
     function getMint(){
     
