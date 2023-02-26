@@ -35,7 +35,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
       visible:true,
       timeout:0
     });
-    var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenHandler[0]);
+    var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenHandler);
  
       var balance = Number(tokenBalance) * Number(tokenPrice?.replace("$", ""));
       console.log(balance);
