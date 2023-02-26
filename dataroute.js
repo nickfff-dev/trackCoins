@@ -65,14 +65,15 @@ datarouter.get('/api/getmintscan', (req, res) => {
     console.log("waited2");
   
 
-    const kuja = await page.$eval('body > div.container > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.md\:tw-col-span-2 > div > div.tw-col-span-2.md\:tw-col-span-2 > div.tw-grid-cols-3.tw-mb-1.md\:tw-flex > div > div.tw-text-4xl.tw-font-bold.tw-my-2.tw-flex.tw-items-center > span.tw-text-gray-900.dark\:tw-text-white.tw-text-3xl > span', (el) => el.innerText)
+    const kuja = await page.$x('/html/body/div[5]/div[5]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span')
+    const kujatxt = await page.evaluate((el)=>el.innerText, kuja[0])
     console.log(kuja)
 
 
-    if (kuja && kuja.length) {
-      console.log(kuja)
+    if (kujatxt && kujatxt.length) {
+      console.log(kujatxt)
      
-        res.send( kuja);
+        res.send( kujatxt);
      
       } 
       
