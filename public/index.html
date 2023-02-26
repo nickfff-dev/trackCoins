@@ -17,7 +17,7 @@
  }).then((res)=>{
   res.text().then((item)=>{
     console.log(item.replace("$", ""))
-    window.mintprice = Number(item.replace("$", ""))
+    localStorage.setItem("mintprice", item.replace("$", "") )
 
   })
  })
@@ -39,9 +39,9 @@
 
    
      document.getElementById("addressMint").innerHTML = data[0];
-
-console.log("mintp", window.mintprice)
-    document.getElementById("tokenMint").innerHTML = Number((data[1])) * window.mintprice;
+   let jua = localStorage.getItem("mintprice")
+console.log("mintp", jua)
+    document.getElementById("tokenMint").innerHTML = (Number((data[1])) * Number(jua)).toFixed(2);
   
       
       })
