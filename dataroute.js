@@ -9,10 +9,10 @@ function delay(time) {
       setTimeout(resolve, time)
   });
 };
-let browser;
+
 datarouter.get('/api/getmintscan', (req, res) => {
 (async () => {
-  browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
+ var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
   const page = await browser.newPage();
   
   const url = "https://www.mintscan.io/cosmos/account/cosmos1dy6ndu0wc5n29lfkw5gh6zpvlh2vf0u8ug8lae";
@@ -56,7 +56,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
 
  datarouter.get('/api/getpricemintscan', (req, res) => {
   (async () => {
-    browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
+   var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
     const page = await browser.newPage();
     
     const url = "https://www.bybit.com/en-US/coin-price/cosmos/";
