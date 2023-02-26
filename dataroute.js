@@ -27,15 +27,15 @@ datarouter.get('/api/getmintscan', (req, res) => {
     visible:true,
     timeout:0
   })
-  const tokenBalance = await page.evaluate((el) => el.innerText, handleme)
+  const tokenBalance = await page.evaluate((el) => el.innerText, handleme);
   
   if (tokenBalance && tokenBalance.length) {
     
-    var tokenPriceH= await page.$x("/html/body/div/main/div[5]/div/div[2]/div[1]/span")
-    var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenPriceH[0])
-    var balance = Number(tokenBalance) * Number(tokenPrice)
-     console.log(balance)
-    res.send([addressMint, balance])
+    var tokenHandler = await page.$x("/html/body/div/main/div[5]/div/div[2]/div[1]/span");
+    var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenHandler[0]);
+    var balance = Number(tokenBalance) * Number(tokenPrice.replace("$", ""));
+    console.log(balance);
+    res.send([addressMint, balance]);
     } 
     
   
