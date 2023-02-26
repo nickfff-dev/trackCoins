@@ -39,7 +39,7 @@
 
    
      document.getElementById("addressMint").innerHTML = data[0];
-   let jua = localStorage.getItem("mintprice")
+   let jua = localStorage.getItem("mintprice");
 console.log("mintp", jua)
     document.getElementById("tokenMint").innerHTML = (Number((data[1])) * Number(jua)).toFixed(2);
   
