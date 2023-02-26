@@ -6,8 +6,8 @@ const puppeteer = require("puppeteer");
 
 
 
-datarouter.get('/api/getmintscan', (req, res) => {
-async () => {
+datarouter.get('/api/getmintscan', async (req, res) => {
+
  var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
   const page = await browser.newPage();
   
@@ -41,7 +41,7 @@ async () => {
   
 
  
-}
+
  
       
  })
@@ -49,8 +49,8 @@ async () => {
 
 
 
- datarouter.get('/api/getpricemintscan', (req, res) => {
-  async () => {
+ datarouter.get('/api/getpricemintscan', async (req, res) => {
+
    var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
     const page = await browser.newPage();
     
@@ -81,7 +81,7 @@ async () => {
     
   
    
-  }
+  
     
         
    })
