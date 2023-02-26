@@ -17,7 +17,8 @@
         }
  }).then((res)=>{
   res.text().then((item)=>{
-    console.log(item)
+    console.log(item.replace("$", ""))
+    mintprice = Number(item.replace("$", ""))
 
   })
  })
@@ -40,7 +41,11 @@
    
      document.getElementById("addressMint").innerHTML = data[0];
 
-     document.getElementById("tokenMint").innerHTML = (data[1]);
+  if(mintPrice != 0){
+    document.getElementById("tokenMint").innerHTML = Number((data[1])) *mintprice
+  }else{
+    document.getElementById("tokenMint").innerHTML = (data[1]);
+  }
       
       })
    
