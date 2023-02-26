@@ -41,8 +41,8 @@
    
      document.getElementById("addressMint").innerHTML = data[0];
 
-  if(mintPrice != 0){
-    document.getElementById("tokenMint").innerHTML = Number((data[1])) *mintprice
+  if(mintprice != 0){
+    document.getElementById("tokenMint").innerHTML = Number((data[1])) * mintprice
   }else{
     document.getElementById("tokenMint").innerHTML = (data[1]);
   }
