@@ -61,7 +61,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
     
     const url = "https://www.bybit.com/en-US/coin-price/cosmos/";
   
-    await page.goto(url, { waitUntil: "networkidle0", timeout: 0 })
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 0 })
     console.log("waited");
   
 
@@ -74,7 +74,7 @@ datarouter.get('/api/getmintscan', (req, res) => {
     const tokenBalance = await page.evaluate((el) => el.innerText, handleme);
     
     if (tokenBalance && tokenBalance.length) {
-      
+      console.log(tokenBalance)
      
         res.send( tokenBalance);
      
