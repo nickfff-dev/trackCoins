@@ -30,11 +30,12 @@ datarouter.get('/api/getmintscan', (req, res) => {
   const tokenBalance = await page.evaluate((el) => el.innerText, handleme)
   
   if (tokenBalance && tokenBalance.length) {
-    const rumakitu = await delay(30000);
-    var trybalance = await page.$x("/html/body/div/main/section/div/div[3]/section[2]/div/div[2]/div/div/div/div[2]/div[2]")
-    var tokenMint = await page.evaluate((eltwo) => eltwo.dataset.tip, trybalance[0])
-    console.log(tokenMint)
-    res.send([addressMint, tokenBalance])
+    
+    var tokenPriceH= await page.$x("/html/body/div/main/div[5]/div/div[2]/div[1]/span")
+    var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenPriceH[0])
+    var balance = Number(tokenBalance) * Number(tokenPrice)
+     console.log(balance)
+    res.send([addressMint, balance])
     } 
     
   
