@@ -59,25 +59,20 @@ datarouter.get('/api/getmintscan', (req, res) => {
    var browser = await puppeteer.launch({headless: true, defaultViewport:false, args: ['--no-sandbox','--start-maximized']});
     const page = await browser.newPage();
     
-    const url = "https://www.bybit.com/en-US/coin-price/cosmos/";
+    const url = "https://www.coingecko.com/en/coins/cosmos-hub";
   
     await page.goto(url, { waitUntil: "networkidle0", timeout: 0 })
     console.log("waited2");
   
 
-    const kuja = await page.$eval("#__next > div > main > div.layout > div.layout-children > div > div.ant-col.ant-col-24.ant-col-md-16 > div.ant-card.card-info.border-radius-4 > div > div.card-info-detail-2", (el) => el.innerText)
+    const kuja = await page.$eval('body > div.container > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.md\:tw-col-span-2 > div > div.tw-col-span-2.md\:tw-col-span-2 > div.tw-grid-cols-3.tw-mb-1.md\:tw-flex > div > div.tw-text-4xl.tw-font-bold.tw-my-2.tw-flex.tw-items-center > span.tw-text-gray-900.dark\:tw-text-white.tw-text-3xl > span', (el) => el.innerText)
     console.log(kuja)
 
-   const handleme =await page.waitForXPath("/html/body/div[3]/div/main/div[2]/div[2]/div/div[1]/div[1]/div/div[2]/div[1]", {
-      timeout:0
-   })
-    
-    const tokenBalance = await page.evaluate((el) => el.innerText, handleme);
-    console.log(tokenBalance)
-    if (tokenBalance && tokenBalance.length) {
-      console.log(tokenBalance)
+
+    if (kuja && kuja.length) {
+      console.log(kuja)
      
-        res.send( tokenBalance);
+        res.send( kuja);
      
       } 
       
