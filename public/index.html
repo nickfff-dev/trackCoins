@@ -8,7 +8,6 @@
 </head>
  <body style="background-color:#111827; color:white; margin:0,100px">
   <script>
-    var mintprice =0;
  fetch("/api/getpricemintscan",{
   method:"GET",
   headers:{
@@ -41,7 +40,7 @@
    
      document.getElementById("addressMint").innerHTML = data[0];
 
-
+console.log("mintp", window.mintprice)
     document.getElementById("tokenMint").innerHTML = Number((data[1])) * window.mintprice;
   
       
