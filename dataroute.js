@@ -36,11 +36,11 @@ datarouter.get('/api/getmintscan', (req, res) => {
       timeout:0
     });
     var tokenPrice = await page.evaluate((eltwo) => eltwo.innerText, tokenHandler[0]);
-    if (tokenPrice && tokenPrice.length) {
-      var balance = Number(tokenBalance) * Number(tokenPrice.replace("$", ""));
+ 
+      var balance = Number(tokenBalance) * Number(tokenPrice?.replace("$", ""));
       console.log(balance);
       res.send([addressMint, balance]);
-   }
+   
     } 
     
   
