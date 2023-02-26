@@ -12,13 +12,13 @@
  fetch("/api/getpricemintscan",{
   method:"GET",
   headers:{
-          "content-type": "text/plain",
+          
           "Access-Control-Allow-Origin" : "*"   
         }
  }).then((res)=>{
   res.text().then((item)=>{
     console.log(item)
-    
+
   })
  })
   </script>

@@ -65,11 +65,13 @@ datarouter.get('/api/getmintscan', (req, res) => {
     console.log("waited2");
   
 
-  
-  
+    const kuja = await page.$eval("#__next > div > main > div.layout > div.layout-children > div > div.ant-col.ant-col-24.ant-col-md-16 > div.ant-card.card-info.border-radius-4 > div > div.card-info-detail-2", (el) => el.innerText)
+    console.log(kuja)
+
    const handleme =await page.waitForXPath("/html/body/div[3]/div/main/div[2]/div[2]/div/div[1]/div[1]/div/div[2]/div[1]", {
       timeout:0
-    })
+   })
+    
     const tokenBalance = await page.evaluate((el) => el.innerText, handleme);
     console.log(tokenBalance)
     if (tokenBalance && tokenBalance.length) {
